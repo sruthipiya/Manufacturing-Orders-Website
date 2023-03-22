@@ -1,0 +1,15 @@
+<odoo>
+    <record id="manufacturing_order_form_id" model="ir.ui.view">
+        <field name="name">Manufacturing Orders</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='product_qty']" position="before">
+                <label for="customer_id" string="Customer"/>
+                <div class="o_row g-0 d-flex">
+                        <field name="customer_id"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

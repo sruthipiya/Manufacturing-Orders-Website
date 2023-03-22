@@ -1,0 +1,50 @@
+<odoo>
+    <template id="portal_manufacturing_orders" name="Manufacturing Order"
+              customize_show="True" inherit_id="portal.portal_my_home"
+              priority="1">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Manufacturing Orders</t>
+                <t t-set="url" t-value="'/my/mo'"/>
+                <t t-set="placeholder_count" t-value="'mo_count'"/>
+            </t>
+        </xpath>
+    </template>
+    <template id="portal_my_manufacturing_orders"
+              name="My Manufacturing Orders">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Manufacturing Orders</t>
+            </t>
+            <t t-if="orders" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Order No.</th>
+                        <th class="text-end">Scheduled Date</th>
+                        <th class="text-end">Quantity</th>
+                        <th class="text-center"/>
+                    </tr>
+                </thead>
+                <t t-foreach="orders" t-as="order">
+                    <tr>
+                        <td>
+                            <t t-out="order.name"/>
+                        </td>
+                        <td class="text-end">
+                            <span t-field="order.date_planned_start"/>
+                        </td>
+                        <td class="text-end">
+                            <span t-field="order.product_qty"/>
+                        </td>
+                    </tr>
+                </t>
+            </t>
+            <p t-else="">There are currently no manufacturing orders for your
+                account.
+            </p>
+        </t>
+    </template>
+
+</odoo>
